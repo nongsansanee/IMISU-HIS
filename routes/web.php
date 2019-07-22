@@ -19,6 +19,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/pateints', function () {
-    return "Hello";
+Route::get('/patients', function () {
+   // return "Hello";
+   return view('patient');
 });

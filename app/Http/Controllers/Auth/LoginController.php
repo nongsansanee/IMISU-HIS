@@ -25,7 +25,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/pateints';
+    protected $redirectTo = '/patients';
 
     /**
      * Create a new controller instance.
@@ -37,5 +37,18 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
+    public function authenticate(Request $request)
+    {
+        $credentials = $request->only('username', 'password');
+
+        if (Auth::attempt(['username' => $username, 'password' => $password, 'active' => 1])) {
+            // The user is active, not suspended, and exists.
+        }
+        
+        if (Auth::attempt($credentials)) {
+            // Authentication passed...
+            return redirect()->intended('home');
+        }
+    }
    
 }
