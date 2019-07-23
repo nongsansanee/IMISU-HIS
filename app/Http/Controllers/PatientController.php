@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Patient;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\DB;
+
 class PatientController extends Controller
 {
     /**
@@ -14,7 +16,38 @@ class PatientController extends Controller
      */
     public function index()
     {
-        //
+        // $patients = DB::table('patients')
+        // ->join('divisions','patients.division_id','=','divisions.id')
+        // ->join('treatments','patients.id','=','treatments.patient_id')
+        // ->select(
+        //     'patients.*',
+        //     'divisions.name as divisions_name',
+        //     'treatments.name as treatments_name',
+        //     'treatments.created_at as treatments_date',
+        // )
+        // ->orderBy('patients.id','asc')
+        // ->orderBy('treatments.created_at', 'desc')
+        // ->paginate(20)
+        // ->get();
+
+        $patients = DB::table('patients')
+                        ->join('divisions','patients.division_id','=','divisions.id')
+                        ->join('treatments','patients.id','=','treatments.patient_id')
+                        ->select(
+                                    'patients.*',
+                                    'divisions.name as divisions_name',
+                                    'treatments.name as treatments_name',
+                                    'treatments.created_at as treatments_date',
+                                )
+                         ->orderBy('patients.id','asc')
+                         ->orderBy('treatments.created_at', 'desc')
+                        ->paginate(20);
+       
+
+        //return $patients;
+        //$patients = \App\Patient::paginate(20);
+       // $patients = DB::table('patients')->paginate(15);
+     return view('patient')->with(['patients'=>$patients]);
     }
 
     /**

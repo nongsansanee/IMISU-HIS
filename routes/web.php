@@ -19,7 +19,8 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/patients', function () {
-   // return "Hello";
-   return view('patient');
-});
+// Route::get('/patients', function () {
+//    return view('patient');
+// });
+
+Route::get('/patients','PatientController@index')->middleware('auth');
