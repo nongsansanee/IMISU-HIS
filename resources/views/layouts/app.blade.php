@@ -22,6 +22,16 @@
    
 
     <link rel="stylesheet" href="{{url('/css/bootstrap-4.3.1/css/bootstrap.min.css')}}">
+    
+    <!-- <link rel="stylesheet" href="{{url('/css/dataTables.bootstrap4.min.css')}}"> -->
+    <!-- <link rel="stylesheet" href="{{url('/DataTables/datatables.min.css')}}"/> -->
+    <!-- <script type="text/javascript" charset="utf8" src="/js/jquery-3.3.1.js"></script>  
+    <script type="text/javascript" charset="utf8" src="/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="/js/dataTables.bootstrap4.min.js"></script> -->
+    <!-- <script type="text/javascript" src="/DataTables/datatables.min.js"></script> -->
+ 
+
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   
