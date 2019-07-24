@@ -10,7 +10,8 @@
 <!-- <link rel="stylesheet" type="text/css" href="css/jquery.dataTables.css"> -->
 <!-- <script type="text/javascript" charset="utf8" src="/js/jquery-3.4.1.min.js"></script>  
 <script type="text/javascript" charset="utf8" src="/js/jquery.dataTables.js"></script> -->
-<!-- {{$patients}} -->
+
+ <!-- {{$patients}}  -->
 
 
 
@@ -26,26 +27,35 @@
       <tr>
     </thead> 
     <tbody >
+  
       @foreach($patients as $patient)
+     
       <tr>
         <td>{{ $patient->first_name }} {{ $patient->last_name }}</td>
-        <td>{{ $patient->dob }}</td>
-        <td>{{ $patient->divisions_name }}</td>
-        <td>{{ $patient->treatments_date }}</td>
-        <td>{{ $patient->treatments_name }}</td>
+        <td>
+          {{ $patient->dob }}
+        </td>
+        <td>  
+        {{ $patient->division_name }}
+         
+        </td>
+        <td>  {{ $patient->latest_treat }}</td>
+        {{-- <td> {{ $patient->treatment_name }} </td> --}}
+        <td> treatment_name </td>
+      
       </tr>
+      
       @endforeach
 
     </tbody>
    
   </table>
- <div class="pagination justify-content-center">
- <!-- {{ $patients->appends(['sort' => 'treatments_date'])->links() }} -->
+  <div class="pagination justify-content-center">
   {{$patients->links()}}
-</div> 
+</div>
 <script>
 $(document).ready( function () {
-  alert("aaaaaaaaaa");
+ // alert("aaaaaaaaaa");
     $('#example').DataTable();
 } );
 </script>

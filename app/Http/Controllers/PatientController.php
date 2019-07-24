@@ -30,18 +30,51 @@ class PatientController extends Controller
         // ->paginate(20)
         // ->get();
 
-        $patients = DB::table('patients')
-                        ->join('divisions','patients.division_id','=','divisions.id')
-                        ->join('treatments','patients.id','=','treatments.patient_id')
+        //--success order by
+        // $patients = DB::table('patients')
+        //                 ->join('divisions','patients.division_id','=','divisions.id')
+        //                 ->join('treatments','patients.id','=','treatments.patient_id')
+        //                 ->select(
+        //                             'patients.*',
+        //                             'divisions.name as divisions_name',
+        //                             'treatments.name as treatments_name',
+        //                             'treatments.created_at as treatments_date',
+        //                         )
+        //                  ->orderBy('patients.id','asc')
+        //                  ->orderBy('treatments.created_at', 'desc')
+        //                 ->paginate(20);
+
+
+            // $latest = DB::table('treatments')
+            //             ->select('patient_id', 'name as treatment_name',  DB::raw('MAX(updated_at) as latest_treat'))
+            //             ->groupBy('patient_id','name')
+            //             ->orderBy('patient_id','asc')
+            //             ->orderBy('updated_at', 'desc');
+
+            // $latest = DB::table('treatments')
+                        //  ->whereRaw('patient_id in (select max(updated_at) as latest_treat from treatments group by (patient_id))');
+
+            $latest = DB::table('treatments')
+                         ->select('patient_id',  DB::raw('MAX(updated_at) as latest_treat'))
+                        ->groupBy('patient_id');
+                       
+
+            $patients = DB::table('patients')
+                        ->join('divisions','patients.division_id',"=",'divisions.id')
+                        ->joinSub($latest, 'patient', function ($join){
+                            $join->on('patient_id','=','patients.id');
+                        
+                            })
                         ->select(
-                                    'patients.*',
-                                    'divisions.name as divisions_name',
-                                    'treatments.name as treatments_name',
-                                    'treatments.created_at as treatments_date',
-                                )
-                         ->orderBy('patients.id','asc')
-                         ->orderBy('treatments.created_at', 'desc')
-                        ->paginate(20);
+                            'patients.*',
+                            'divisions.name as division_name',
+                            'latest_treat',
+                   
+                            )
+                         ->paginate(20);
+                      //  ->get();
+
+      
        
 
         //return $patients;

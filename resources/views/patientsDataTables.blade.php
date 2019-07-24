@@ -17,9 +17,9 @@
       <tr>
         <td>{{ $patient->first_name }} </td>
         <td>{{ $patient->dob }}</td>
-        <td>{{ $patient->divisions_name }}</td>
-        <td>{{ $patient->treatments_date }}</td>
-        <td>{{ $patient->treatments_name }}</td>
+        <td>{{ $patient->division_name }}</td>
+        <td>{{ $patient->latest_treat }}</td>
+        <td>treatment_name</td>
       </tr>
       @endforeach
 
@@ -30,9 +30,9 @@
 <script>
 $(document).ready( function () {
   alert("aaaaaaaaaa");
-    //$('#example').DataTable();
-    $('#example').DataTable( {
-        "order": [[ 3, "desc" ]]
-    } );
+    $('#example').DataTable();
+    // $('#example').DataTable( {
+    //     "order": [[ 3, "desc" ]]
+    // } );
 } );
 </script>
