@@ -16,6 +16,9 @@ class PatientController extends Controller
      */
     public function index()
     {
+
+        $patients = Patient::paginate(20);
+
         // $patients = DB::table('patients')
         // ->join('divisions','patients.division_id','=','divisions.id')
         // ->join('treatments','patients.id','=','treatments.patient_id')
@@ -25,10 +28,12 @@ class PatientController extends Controller
         //     'treatments.name as treatments_name',
         //     'treatments.created_at as treatments_date',
         // )
-        // ->orderBy('patients.id','asc')
-        // ->orderBy('treatments.created_at', 'desc')
-        // ->paginate(20)
-        // ->get();
+        // ->paginate(20);
+
+        //  ->orderBy('patients.id','asc')
+        //  ->orderBy('treatments.created_at', 'desc')
+      
+        
 
         //--success order by
         // $patients = DB::table('patients')
@@ -54,24 +59,26 @@ class PatientController extends Controller
             // $latest = DB::table('treatments')
                         //  ->whereRaw('patient_id in (select max(updated_at) as latest_treat from treatments group by (patient_id))');
 
-            $latest = DB::table('treatments')
-                         ->select('patient_id',  DB::raw('MAX(updated_at) as latest_treat'))
-                        ->groupBy('patient_id');
+
+            //----try JoinSub
+            // $latest = DB::table('treatments')
+            //              ->select('patient_id',  DB::raw('MAX(updated_at) as latest_treat'))
+            //             ->groupBy('patient_id');
                        
 
-            $patients = DB::table('patients')
-                        ->join('divisions','patients.division_id',"=",'divisions.id')
-                        ->joinSub($latest, 'patient', function ($join){
-                            $join->on('patient_id','=','patients.id');
+            // $patients = DB::table('patients')
+            //             ->join('divisions','patients.division_id',"=",'divisions.id')
+            //             ->joinSub($latest, 'patient', function ($join){
+            //                 $join->on('patient_id','=','patients.id');
                         
-                            })
-                        ->select(
-                            'patients.*',
-                            'divisions.name as division_name',
-                            'latest_treat',
+            //                 })
+            //             ->select(
+            //                 'patients.*',
+            //                 'divisions.name as division_name',
+            //                 'latest_treat',
                    
-                            )
-                         ->paginate(20);
+            //                 )
+            //              ->paginate(20);
                       //  ->get();
 
       
@@ -80,7 +87,7 @@ class PatientController extends Controller
         //return $patients;
         //$patients = \App\Patient::paginate(20);
        // $patients = DB::table('patients')->paginate(15);
-     return view('patient')->with(['patients'=>$patients]);
+     return view('patientReport1')->with(['patients'=>$patients]);
     }
 
     /**
