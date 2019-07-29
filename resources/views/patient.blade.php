@@ -11,7 +11,7 @@
 <!-- <script type="text/javascript" charset="utf8" src="/js/jquery-3.4.1.min.js"></script>  
 <script type="text/javascript" charset="utf8" src="/js/jquery.dataTables.js"></script> -->
 
- <!-- {{$patients}}  -->
+ {{$patients}} 
 
 
 
@@ -33,15 +33,13 @@
       <tr>
         <td>{{ $patient->first_name }} {{ $patient->last_name }}</td>
         <td>
-          {{ $patient->dob }}
+          {{ $patient->dob->format('M-d-Y')}}
         </td>
         <td>  
-        {{ $patient->division_name }}
-         
+        {{ $patient->division->name }}  
         </td>
-        <td>  {{ $patient->latest_treat }}</td>
-        {{-- <td> {{ $patient->treatment_name }} </td> --}}
-        <td> treatment_name </td>
+        <td>  {{ $patient->treatments->first()->created_at}}</td>
+        <td> {{ $patient->treatments->first()->name }} </td> 
       
       </tr>
       

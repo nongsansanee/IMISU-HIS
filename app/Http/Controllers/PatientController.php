@@ -87,7 +87,7 @@ class PatientController extends Controller
         //return $patients;
         //$patients = \App\Patient::paginate(20);
        // $patients = DB::table('patients')->paginate(15);
-     return view('patientReport1')->with(['patients'=>$patients]);
+     return view('patient')->with(['patients'=>$patients]);
     }
 
     /**
