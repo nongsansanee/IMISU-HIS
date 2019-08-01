@@ -11,7 +11,7 @@
 <!-- <script type="text/javascript" charset="utf8" src="/js/jquery-3.4.1.min.js"></script>  
 <script type="text/javascript" charset="utf8" src="/js/jquery.dataTables.js"></script> -->
 
- {{$patients}} 
+ <!-- {{$patients}}  -->
 
 
 

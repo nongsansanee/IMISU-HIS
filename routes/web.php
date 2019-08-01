@@ -28,23 +28,26 @@ Route::get('/patients','PatientController@index')->middleware('auth');
 Route::get('/patientsDataTables',function(){
 
    // $patients = \App\patient::all();
-   $latest = DB::table('treatments')
-            ->select('patient_id',  DB::raw('MAX(updated_at) as latest_treat'))
-            ->groupBy('patient_id');
+//    $latest = DB::table('treatments')
+//             ->select('patient_id',  DB::raw('MAX(updated_at) as latest_treat'))
+//             ->groupBy('patient_id');
             
 
-    $patients = DB::table('patients')
-                ->join('divisions','patients.division_id',"=",'divisions.id')
-                ->joinSub($latest, 'patient', function ($join){
-                    $join->on('patient_id','=','patients.id');
+//     $patients = DB::table('patients')
+//                 ->join('divisions','patients.division_id',"=",'divisions.id')
+//                 ->joinSub($latest, 'patient', function ($join){
+//                     $join->on('patient_id','=','patients.id');
             
-                })
-                ->select(
-                    'patients.*',
-                    'divisions.name as division_name',
-                    'latest_treat',
-                )
-                 ->get();
+//                 })
+//                 ->select(
+//                     'patients.*',
+//                     'divisions.name as division_name',
+//                     'latest_treat',
+//                 )
+//                  ->get();
+
+  //  $patients = Patient::paginate(20);
+    $patients = \App\patient::all();
     return view('patientsDataTables')->with(['patients'=>$patients]);
  });
 

@@ -487,8 +487,6 @@
     </table>
 <script>
 $(document).ready(function() {
-    $('#example').DataTable( {
-        "order": [[ 3, "desc" ]]
-    } );
+    $('#example').DataTable();
 } );
 </script>
